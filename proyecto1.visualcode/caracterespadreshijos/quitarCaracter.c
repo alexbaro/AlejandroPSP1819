@@ -10,8 +10,11 @@
 
 int main(int argc, char const *argv[]){
     
-    FILE * fichero;
-    fichero = fopen("./texto.txt", "r");
+    FILE * ficherolectura = argv[0];
+    char caracterbuscar = argv[1];
+
+    //FILE * fichero;
+    ficherolectura = fopen("./texto.txt", "r");
 
     FILE * ficherow;
     ficherow = fopen("./copiatexto.txt", "w");
@@ -24,11 +27,11 @@ int main(int argc, char const *argv[]){
         
         char caracter;
 
-        while((caracter = fgetc(fichero)) != -1){
+        while((caracter = fgetc(ficherolectura)) != -1){
             
             printf("%c", caracter);
 
-            if(caracter == 'a'){
+            if(caracter = caracterbuscar){
 
                 putc("_", ficherow);
 
@@ -42,10 +45,7 @@ int main(int argc, char const *argv[]){
 
         }
         printf("\n");
-        char caracter2;
-        while((caracter2 = fgetc(ficherow)) != -1){
-            printf("%c", caracter2);
-        }      
+             
         printf("\n");
     }
 
