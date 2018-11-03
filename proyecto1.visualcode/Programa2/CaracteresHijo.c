@@ -9,35 +9,38 @@
 #include <errno.h>
 
 int main(int argc, char const *argv[]){
-    //Hijo: envia el fichero nuevo, que se va a copiar.
-    //Padre: envia el fichero principal con el texto.
+    //creo los procesos
     pid_t pid;
     pid = fork();
 
-    if(pid == -1){
+    if(pid == -1){//error de procesos
 
         fprintf(stderr, "Error");
         exit(-1);
 
-    }else if(pid == 0){
+    }else if(pid == 0){//proceso hijo
         
-        printf("Soy el hijo, voy a crear el fichero."); 
-        int ficherolectura;
-        ficherolectura = fopen("./texto.txt", O_RDONLY);
+        int caracter;
 
-    }else if(pid == 1){
+        printf("Soy el hijo, voy a enviar el fichero al padre.\n"); 
+
+        FILE * ficherolectura = fopen("./texto.txt", "r");//fichero original
+
+
+    }else {
 
         FILE * ficherow;
-        ficherow = fopen("./copiatexto.txt", "w");
+        ficherow = fopen("./copiatexto.txt", "w");//fichero nuevo
+        FILE * ficherolectura = fopen("./texto.txt", "r");//fichero original
         printf("Soy el padre, voy a enviar el texto para copiar.");
 
         char caracter;
-        while((caracter = getc(ficherolectura)) != -1){
+        while((caracter = getc(ficherolectura)) != -1){//leo el fichero original y lo copio al nuevo fichero
 
             putc(caracter,ficherow);
 
         }
-        
+       
     }
 
     return 0;
