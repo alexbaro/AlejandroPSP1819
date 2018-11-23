@@ -23,16 +23,36 @@ int main(int argc, char const *argv[]){
     printf("Escribe el primer número que quieres operar: ");
     //scanf("%c", &numero);
     fgets(numero, TAM_MAX, stdin);
-    while(numero){
-
-
-        
-    }
+    
     num = atof(numero);
 
-    printf("%lf\n", num);
+    char caracter[1] = ',';
 
-    
+    for (int i=0;i<strlen(num);i++)
+    { 
+        while (string[i] != '\0') 
+        { 
+             if (string[i] == caracter) 
+             { 
+                 printf("hola");  // Solo subes quando encuentra el primer caracter, y por eso
+                                    // no encuentra los otros caracteres, a mi me funciono
+             } 
+             
+        }
+    }
+
+    if(){//controlar la ,(si pones , no hace la operacion)
+        //cambiar la , por un .
+
+        double total = 3.2 + num;
+        printf("%lf %lf\n", num, total);
+
+    }else{
+
+        double total = 3.2 + num;
+        printf("%lf %lf\n", num, total);
+
+    }
 
     printf("Escribe la operación ( +, -, *, /): ");
     //scanf("%c", &operacion);
