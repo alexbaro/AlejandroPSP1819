@@ -30,9 +30,9 @@ int main(int argc, char const *argv[]){
 
     for (int i=0;i<strlen(num);i++)
     { 
-        while (string[i] != '\0') 
+        while (num[i] != '\0') 
         { 
-             if (string[i] == caracter) 
+             if (num[i] == caracter) 
              { 
                  printf("hola");  // Solo subes quando encuentra el primer caracter, y por eso
                                     // no encuentra los otros caracteres, a mi me funciono
@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]){
              
         }
     }
-
+    /*
     if(){//controlar la ,(si pones , no hace la operacion)
         //cambiar la , por un .
 
@@ -52,7 +52,7 @@ int main(int argc, char const *argv[]){
         double total = 3.2 + num;
         printf("%lf %lf\n", num, total);
 
-    }
+    }*/
 
     printf("Escribe la operación ( +, -, *, /): ");
     //scanf("%c", &operacion);
