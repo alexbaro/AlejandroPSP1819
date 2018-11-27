@@ -11,58 +11,63 @@
 
 #define RUTA_PIPE "/tmp/tuberia.pipe"
 #define TAM_MAX 100
+int prepararPipe(const char*);
 
 int main(int argc, char const *argv[]){
-    
+    //system("rm "RUTA_PIPE);
     double atof (const char *cadena);
+
+    int pipe = prepararPipe(RUTA_PIPE);
+    char buffer[TAM_MAX];
 
     char numero[50];
     char operacion[1];
     double num;
-
+   
     printf("Escribe el primer número que quieres operar: ");
-    //scanf("%c", &numero);
+    //scanf("%c\n", &numero);
     fgets(numero, TAM_MAX, stdin);
     
     num = atof(numero);
 
-    char caracter[1] = ',';
-
-    for (int i=0;i<strlen(num);i++)
-    { 
-        while (num[i] != '\0') 
-        { 
-             if (num[i] == caracter) 
-             { 
-                 printf("hola");  // Solo subes quando encuentra el primer caracter, y por eso
-                                    // no encuentra los otros caracteres, a mi me funciono
-             } 
-             
-        }
-    }
-    /*
-    if(){//controlar la ,(si pones , no hace la operacion)
-        //cambiar la , por un .
-
-        double total = 3.2 + num;
-        printf("%lf %lf\n", num, total);
-
-    }else{
-
-        double total = 3.2 + num;
-        printf("%lf %lf\n", num, total);
-
-    }*/
-
     printf("Escribe la operación ( +, -, *, /): ");
-    //scanf("%c", &operacion);
+    //scanf("%c", operacion);
     fgets(operacion, TAM_MAX, stdin);
-
+    //printf("%c\n", &operacion);
+    /*
     while(operacion != '+'){
-        printf("Operador incorrecto escribe uno de estos ( +, -, *, /): ");
+
+        printf("Escribe la operación ( +, -, *, /): ");
         //scanf("%c\n", &operacion);
         fgets(operacion, TAM_MAX, stdin);
-    }
-    printf("hola");
+        printf("%c\n", operacion);
+        if(operacion == '+'{
+            break;
+        }
+    }*/
+    
+    //write(RUTA_PIPE, TAM_MAX, num);
+ 
+    system("rm "RUTA_PIPE);
+
     return 0;
+}
+
+int prepararPipe(const char* rutaPipe){
+  fprintf(stdout,"Creando el pipe...");
+ 
+  if ( mkfifo(rutaPipe,0666) == -1){
+    perror("Error creando el fichero de PIPE");
+    exit(-1);
+  }
+  printf("Hecho!\n");
+  printf("Abriendo el pipe. Esperando a que el receptor lo abra en modo lectura...");
+  fflush(stdout); 
+  int descriptor = open(rutaPipe,O_WRONLY);
+  if ( descriptor == -1 ){
+    perror("Error abriendo el PIPE");
+    exit(-2);
+  }
+  printf("Hecho!\n");
+  return descriptor;
 }
